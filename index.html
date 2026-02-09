@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>For My GF 💖</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      color: #fff;
+      text-align: center;
+      overflow: hidden;
+      padding: 20px;
+    }
+
+    h1 {
+      font-size: 2.5em;
+      margin-bottom: 50px;
+      text-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+    }
+
+    button {
+      padding: 30px 60px;
+      font-size: 2em;
+      border: none;
+      border-radius: 15px;
+      cursor: pointer;
+      background: #ff6a95;
+      color: white;
+      box-shadow: 0 7px 25px rgba(255,105,150,0.7);
+      transition: transform 0.2s, background 0.3s, box-shadow 0.3s;
+    }
+
+    button:hover {
+      transform: scale(1.1);
+      background: #ff3c70;
+      box-shadow: 0 10px 30px rgba(255,105,150,0.9);
+    }
+
+    #message {
+      font-size: 3em;
+      opacity: 0;
+      transition: opacity 0.5s ease-in-out;
+      margin-bottom: 20px;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+    }
+
+    #sorryLetter {
+      font-size: 1.5em;
+      max-width: 600px;
+      opacity: 0;
+      transition: opacity 0.5s ease-in-out;
+      line-height: 1.5em;
+      background: rgba(255,255,255,0.2);
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+
+    /* Hearts animation */
+    .heart {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: red;
+      transform: rotate(45deg);
+      animation: float 5s linear infinite;
+      opacity: 0.8;
+    }
+
+    .heart::before,
+    .heart::after {
+      content: "";
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: red;
+      border-radius: 50%;
+    }
+
+    .heart::before { top: -10px; left: 0; }
+    .heart::after { left: 10px; top: 0; }
+
+    @keyframes float {
+      0% { transform: translateY(100vh) scale(1) rotate(45deg); opacity: 0.8; }
+      50% { opacity: 1; }
+      100% { transform: translateY(-50vh) scale(0.5) rotate(45deg); opacity: 0; }
+    }
+
+    /* Small floating sparkles for main page */
+    .sparkle {
+      position: absolute;
+      width: 5px;
+      height: 5px;
+      background: #fff;
+      border-radius: 50%;
+      opacity: 0.8;
+      animation: sparkle 3s linear infinite;
+    }
+
+    @keyframes sparkle {
+      0% { transform: translateY(0) scale(1); opacity: 0.5; }
+      50% { opacity: 1; }
+      100% { transform: translateY(-80vh) scale(0.5); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+  <div id="container">
+    <h1>Click the button, Baby Monu 💌</h1>
+    <button id="openBtn">Open it</button>
+  </div>
+
+  <div id="message">I love you, Janu 💖</div>
+  <div id="sorryLetter">
+    Sorry ma sogya alarm ki8 aisi ki tesi 😅💌<br>
+    I'm really sorry for any mistakes I've made.<br>
+    I never want to hurt you, and I hope you can forgive me.<br>
+    You mean the world to me, Baby Monu ❤️
+  </div>
+
+  <script>
+    const container = document.getElementById('container');
+    const message = document.getElementById('message');
+    const sorryLetter = document.getElementById('sorryLetter');
+    const button = document.getElementById('openBtn');
+    const body = document.body;
+
+    // Track all sparkle elements
+    let sparkleElements = [];
+
+    // Create initial sparkles
+    function createSparkles(count) {
+      for (let i = 0; i < count; i++) {
+        let sparkle = document.createElement('div');
+        sparkle.classList.add('sparkle');
+        sparkle.style.left = Math.random() * window.innerWidth + 'px';
+        sparkle.style.top = Math.random() * window.innerHeight + 'px';
+        sparkle.style.animationDuration = (2 + Math.random() * 3) + 's';
+        sparkle.style.width = sparkle.style.height = (2 + Math.random() * 5) + 'px';
+        body.appendChild(sparkle);
+        sparkleElements.push(sparkle);
+        // Remove after 5s
+        setTimeout(() => { sparkle.remove(); }, 5000);
+      }
+    }
+
+    createSparkles(50); // initial main page sparkles
+
+    button.addEventListener('click', () => {
+      container.style.display = 'none'; // Hide heading + button
+      message.style.opacity = '1';       // Show love message
+      sorryLetter.style.opacity = '1';   // Show sorry letter
+
+      // Remove all sparkles
+      sparkleElements.forEach(s => s.remove());
+      sparkleElements = [];
+
+      createHearts(); // Add only hearts after click
+    });
+
+    // Create floating hearts
+    function createHearts() {
+      for (let i = 0; i < 30; i++) {
+        let heart = document.createElement('div');
+        heart.classList.add('heart');
+        heart.style.left = Math.random() * window.innerWidth + 'px';
+        heart.style.animationDuration = (3 + Math.random() * 5) + 's';
+        heart.style.width = heart.style.height = (10 + Math.random() * 20) + 'px';
+        body.appendChild(heart);
+        setTimeout(() => { heart.remove(); }, 8000);
+      }
+    }
+  </script>
+</body>
+</html>
